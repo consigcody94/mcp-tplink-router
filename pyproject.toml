@@ -45,9 +45,9 @@ dev = [
 mcp-tplink-router = "mcp_tplink_router:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/mcp-tplink-router"
-Repository = "https://github.com/yourusername/mcp-tplink-router"
-Issues = "https://github.com/yourusername/mcp-tplink-router/issues"
+Homepage = "https://github.com/consigcody94/mcp-tplink-router"
+Repository = "https://github.com/consigcody94/mcp-tplink-router"
+Issues = "https://github.com/consigcody94/mcp-tplink-router/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcp_tplink_router"]

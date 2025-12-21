@@ -36,7 +36,7 @@ Rather than reverse-engineering the entire encryption protocol (which changes be
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-tplink-router.git
+git clone https://github.com/consigcody94/mcp-tplink-router.git
 cd mcp-tplink-router
 
 # Create virtual environment
@@ -349,7 +349,7 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 ```bash
 # Development setup
-git clone https://github.com/yourusername/mcp-tplink-router.git
+git clone https://github.com/consigcody94/mcp-tplink-router.git
 cd mcp-tplink-router
 python -m venv venv
 source venv/bin/activate

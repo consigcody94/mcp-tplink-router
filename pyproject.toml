@@ -5,24 +5,42 @@ build-backend = "hatchling.build"
 [project]
 name = "mcp-tplink-router"
 version = "0.1.0"
-description = "Automate TP-Link BE3600 routers using Playwright browser automation"
+description = "MCP server for TP-Link BE3600 router automation using Playwright browser automation"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your@email.com"}
+    {name = "MCP TP-Link Router Contributors"}
 ]
-keywords = ["tplink", "router", "automation", "playwright", "port-forwarding", "mcp"]
+maintainers = [
+    {name = "MCP TP-Link Router Contributors"}
+]
+keywords = [
+    "tplink",
+    "router",
+    "automation",
+    "playwright",
+    "port-forwarding",
+    "mcp",
+    "model-context-protocol",
+    "home-automation",
+    "network",
+]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Home Automation",
     "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed",
 ]
 dependencies = [
     "playwright>=1.40.0",
@@ -39,6 +57,12 @@ mcp = [
 dev = [
     "pytest>=7.0.0",
     "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+all = [
+    "mcp-tplink-router[mcp,dev]",
 ]
 
 [project.scripts]
@@ -47,7 +71,77 @@ mcp-tplink-router = "mcp_tplink_router:main"
 [project.urls]
 Homepage = "https://github.com/consigcody94/mcp-tplink-router"
 Repository = "https://github.com/consigcody94/mcp-tplink-router"
+Documentation = "https://github.com/consigcody94/mcp-tplink-router#readme"
 Issues = "https://github.com/consigcody94/mcp-tplink-router/issues"
+Changelog = "https://github.com/consigcody94/mcp-tplink-router/releases"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mcp_tplink_router"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = [
+    "-v",
+    "--tb=short",
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+namespace_packages = true
+explicit_package_bases = true
+
+[[tool.mypy.overrides]]
+module = [
+    "playwright.*",
+    "tplinkrouterc6u.*",
+    "mcp.*",
+]
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # do not perform function calls in argument defaults
+    "B905",   # zip without strict
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["mcp_tplink_router"]
+
+[tool.coverage.run]
+source = ["src/mcp_tplink_router"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
